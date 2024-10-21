@@ -5,6 +5,7 @@ const Header = () => {
   const [isAdmin, setIsAdmin] = useState(false); // New state to track admin status
   const [isScrolled, setIsScrolled] = useState(false); // State to track if user has scrolled
   const navigate = useNavigate(); // To navigate to admin login page
+  const [alert, setAlert] = useState(true); // State to track if alert is open
 
   // Check if the admin is logged in by checking the token in localStorage
   useEffect(() => {
@@ -94,6 +95,15 @@ const Header = () => {
           </button>
         )}
       </div>
+      {alert === true ? 
+        <div className="fixed top-1/2 -translate-y-1/2 z-50 w-screen h-screen bg-rws-gray bg-opacity-70 flex flex-col justify-center items-center">
+        <h1 className="text-xl sm:text-3xl w-1/2 text-center font-bold bg-white bg-opacity-70 p-6 rounded-2xl">
+          Website is currently in development, styling and some features may not function as intended. Please check back at a later time.
+        </h1>
+        <button onClick={() => setAlert(false)} className="text-xl sm:text-3xl bg-slate-400 p-6 rounded-2xl mt-6">
+          Close
+        </button>
+      </div> : null}
     </header>
   );
 };
