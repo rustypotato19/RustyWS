@@ -9,7 +9,7 @@ pipeline {
     stages {
         stage('Clone Repository') {
             steps {
-                git branch: 'main', url: 'https://github.com/rustypotato19/RustysWS.git'
+                git branch: 'main', url: 'https://github.com/rustypotato19/RustyWS.git'
             }
         }
 
