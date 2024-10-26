@@ -2,7 +2,7 @@ import React from "react";
 
 const AboutSection = () => {
   return (
-    <section className="mx-auto bg-rws-dark-blue text-rws-smoke w-[90dvw] lg:w-[63dvw] h-[70dvh] py-16 mb-20 text-center rounded-[75px] lg:rounded-[175px] flex justify-center items-center" 
+    <section className="mx-auto bg-rws-dark-blue text-rws-smoke w-[90dvw] lg:w-[63dvw] h-fit py-16 mb-20 text-center rounded-[75px] lg:rounded-[175px] flex justify-center items-center" 
     style={{
       boxShadow: "0px 2px 5px rgba(0, 0, 0, 0.4)",
     }}>

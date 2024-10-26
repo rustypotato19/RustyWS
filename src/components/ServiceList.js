@@ -105,7 +105,7 @@ const ServiceList = () => {
 
             // Styles for different items
             let itemClasses =
-              "bg-rws-smoke absolute p-6 mt-6 rounded-2xl shadow-md transition-all duration-1000 ease-in-out transform w-[65dvw] lg:w-[23dvw] h-[30dvh] lg:h-[21dvh]";
+              "bg-rws-smoke absolute p-6 mt-6 rounded-2xl shadow-md transition-all duration-1000 ease-in-out transform w-[65dvw] lg:w-[23dvw] h-fit lg:h-[21dvh]";
             let transformStyle = "";
 
             if (offset === 0) {
@@ -138,7 +138,7 @@ const ServiceList = () => {
                 onClick={() => openModal(service)}
               >
                 <div className="h-full w-full flex flex-col justify-evenly items-center">
-                  <h3 className="text-lg lg:text-2xl text-rws-dark-blue font-semibold mb-4">{service.title}</h3>
+                  <h3 className="text-md lg:text-2xl text-rws-dark-blue w-full font-semibold mb-4">{service.title}</h3>
                   <p className="text-rws-gray text-sm lg:text-lg">{service.desc}</p>
                 </div>
               </div>
