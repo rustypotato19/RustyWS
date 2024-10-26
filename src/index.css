@@ -27,14 +27,3 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
-
-/* Add these styles to your CSS */
-.slide-in-left {
-  transform: translateX(-100vw);
-  transform: translateX(0);
-}
-
-.slide-out-right {
-  transform: translateX(0);
-  transform: translateX(100vw);
-}

@@ -124,14 +124,14 @@ const FormModal = ({ isOpen, onClose }) => {
       <div className="absolute inset-0 bg-black bg-opacity-50 backdrop-blur-sm"></div>
 
       {/* Modal */}
-      <div className={`text-rws-gray relative bg-white rounded-lg shadow-lg p-8 mx-4 z-10 max-w-[40dvw] w-full transform transition-all duration-500 ease-in-out ${animate ? "translate-y-0 opacity-100" : "translate-y-full opacity-0"}`}>
+      <div className={`text-rws-gray relative bg-white rounded-lg shadow-lg p-8 mx-4 z-10 h-fit w-[95dvw] lg:w-[40dvw] transform transition-all duration-500 ease-in-out ${animate ? "translate-y-0 opacity-100" : "translate-y-full opacity-0"}`}>
         {!success ? (
           <>
-            <h2 className="text-4xl text-rws-dark-blue font-bold mb-4">
+            <h2 className="text-2xl lg:text-4xl text-rws-dark-blue font-bold mb-4">
               {loading ? ("") : 
                 <div className="flex flex-col items-center justify-center">
-                  <div className="flex flex-row justify-center items-center mx-auto">
-                    <img src="/images/logos/RWSLogoBlue.png" alt="" className="w-20"></img>
+                  <div className="flex flex-row justify-center items-center mx-auto px-4 lg:px-0">
+                    <img src="/images/logos/RWSLogoBlue.png" alt="" className="w-16 lg:w-20"></img>
                     <p>&nbsp;&nbsp;Rusty's Web Services</p>
                   </div>
                   <p className='text-sm text-rws-gray font-normal opacity-60'>* indicates required field</p>
@@ -145,7 +145,7 @@ const FormModal = ({ isOpen, onClose }) => {
                 <LoaderComponent />
               </div>
             ) : (
-              <form onSubmit={handleSubmit} className="space-y-4">
+              <form onSubmit={handleSubmit} className="space-y-2 lg:space-y-4">
                 {/* Form Fields */}
                 <div>
                   <label htmlFor="request-type" className="block text-gray-700">Request Type *</label>

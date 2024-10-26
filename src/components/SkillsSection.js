@@ -108,23 +108,23 @@ const SkillsSection = () => {
   };
 
   return (
-    <section className="mx-auto skills p-12 flex justify-center items-center w-[70dvw] mb-6">
+    <section className="mx-auto skills p-12 flex justify-center items-center w-full mb-6">
         <div className="w-full text-center flex flex-col justify-center items-center">
-          <h2 className="w-[70dvw] text-3xl text-rws-smoke font-bold bg-rws-dark-blue rounded-full py-2 mb-12"
+          <h2 className="w-[90dvw] lg:w-[70dvw] text-2xl lg:text-3xl text-rws-smoke font-bold bg-rws-dark-blue rounded-full py-2 mb-12"
             style={{
               boxShadow: "0px 2px 5px rgba(0, 0, 0, 0.4)"
             }}
           >
             Our Skills
           </h2>
-          <ul className={`flex items-center gap-8 justify-center flex-row max-w-full flex-wrap mt-8 mb-4 ${focusedSkill !== null ? 'blur-sm' : ''}`}>
+          <ul className={`w-[85dvw] lg:w-[70dvw] flex items-center gap-2 lg:gap-8 justify-center flex-row flex-wrap mt-8 mb-4 ${focusedSkill !== null ? 'blur-sm' : ''}`}>
             {skills.map((skill, index) => (
               <li
                 key={index}
                 onClick={() => handleSkillClick(index)}
                 className="flex items-center justify-center p-2 bg-[#f4f4f4] rounded-lg shadow-md transform transition-all duration-500 cursor-pointer hover:scale-105 hover:shadow-xl hover:shadow-rws-dark-blue md:p-4"
               >
-                <img src={skill.imgSrc} alt={skill.name} className="w-8 md:w-16" />
+                <img src={skill.imgSrc} alt={skill.name} className="w-20 lg:w-16" />
               </li>
             ))}
           </ul>
@@ -133,16 +133,16 @@ const SkillsSection = () => {
       {/* Floating modal for the focused skill */}
       {focusedSkill !== null && (
         <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 backdrop-blur-sm z-50">
-          <div className="h-[46dvh] bg-[#ebebeb] w-[50dvw] p-6 rounded-3xl shadow-lg transform transition-transform duration-500 text-center mx-4 overflow-auto">
+          <div className="h-[70dvh] lg:h-[46dvh] bg-rws-smoke w-[90dvw] lg:w-[50dvw] p-6 rounded-3xl shadow-lg transform transition-transform duration-500 text-center mx-4 overflow-auto">
             <div className="flex flex-col justify-center items-center">
               <div className="flex flex-row justify-center items-center mb-4">
                 <img src={skills[focusedSkill].imgSrc} alt={skills[focusedSkill].name} className="w-14 mr-2" />
                 <h3 className="text-3xl font-semibold">{skills[focusedSkill].name}</h3>
               </div>
-              <p className="text-rws-gray text-lg overflow-y-auto h-[25dvh] w-[90%] border border-gray-400 p-2 rounded-lg">{skills[focusedSkill].description}</p>
+              <p className="text-rws-gray text-lg overflow-y-auto h-[45dvh] lg:h-[25dvh] w-[90%] border border-gray-400 p-2 rounded-lg">{skills[focusedSkill].description}</p>
             </div>
             <div 
-              className="absolute top-4 right-6 text-xl"
+              className="absolute top-6 lg:top-4 right-6 text-xl"
             >
               <p 
                 onClick={() => setFocusedSkill(null)}
@@ -162,10 +162,10 @@ const SkillsSection = () => {
               </a>
             </div>
             {/* Previous and Next Arrows */}
-            <button onClick={handlePrevSkill} className="text-gray-500 absolute bottom-1/2 translate-y-1/2 left-6 text-2xl px-2 cursor-pointer hover:bg-rws-dark-blue hover:text-white rounded-full transition-all duration-200">
+            <button onClick={handlePrevSkill} className="text-gray-500 absolute bottom-1/2 translate-y-1/2 left-1.5 lg:left-6 text-2xl px-2 cursor-pointer hover:bg-rws-dark-blue hover:text-white rounded-full transition-all duration-200">
               &lt;
             </button>
-            <button onClick={handleNextSkill} className="text-gray-500 absolute bottom-1/2 translate-y-1/2 right-6 text-2xl px-2 cursor-pointer hover:bg-rws-dark-blue hover:text-white rounded-full transition-all duration-200">
+            <button onClick={handleNextSkill} className="text-gray-500 absolute bottom-1/2 translate-y-1/2 right-1.5 lg:right-6 text-2xl px-2 cursor-pointer hover:bg-rws-dark-blue hover:text-white rounded-full transition-all duration-200">
               &gt;
             </button>
           </div>

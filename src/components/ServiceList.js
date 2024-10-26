@@ -89,7 +89,7 @@ const ServiceList = () => {
     <section className="cursor-default py-10">
       <div className="container mx-auto text-center">
         <h2
-          className="mx-auto text-3xl text-[#ebebeb] bg-rws-dark-blue rounded-full font-bold py-2 w-[70dvw]"
+          className="mx-auto text-2xl lg:text-3xl text-rws-smoke bg-rws-dark-blue rounded-full font-bold py-2 w-[90dvw] lg:w-[70dvw]"
           style={{
             boxShadow: "0px 2px 5px rgba(0, 0, 0, 0.4)",
           }}
@@ -98,25 +98,25 @@ const ServiceList = () => {
         </h2>
 
         {/* Service Items Carousel */}
-        <div className="relative flex items-center justify-center overflow-hidden h-[32dvh] mb-6 mt-12">
+        <div className="relative flex items-center justify-center overflow-hidden h-[40dvh] lg:h-[32dvh] mb-6 mt-12">
           {services.map((service, index) => {
             // Calculate the offset relative to currentIndex
             const offset = (index - currentIndex + services.length) % services.length;
 
             // Styles for different items
             let itemClasses =
-              "bg-[#ebebeb] absolute p-6 mt-6 rounded-2xl shadow-md transition-all duration-1000 ease-in-out transform w-[23dvw] h-[21dvh]";
+              "bg-rws-smoke absolute p-6 mt-6 rounded-2xl shadow-md transition-all duration-1000 ease-in-out transform w-[65dvw] lg:w-[23dvw] h-[30dvh] lg:h-[21dvh]";
             let transformStyle = "";
 
             if (offset === 0) {
               // Previous item - to the left
-              transformStyle = "scale-90 opacity-100 bg-gray-300 -translate-x-[22dvw] blur-[4px] -z-20";
+              transformStyle = "scale-90 opacity-0 lg:opacity-100 bg-gray-300 -translate-x-[80dvw] lg:-translate-x-[22dvw] blur-[4px] -z-20";
             } else if (offset === 1) {
               // Focused item - in the middle
               transformStyle = "scale-125 opacity-100 translate-x-0 hover:scale-[135%] hover:cursor-pointer hover:bg-rws-smoke z-20";
             } else if (offset === 2) {
               // Next item - to the right
-              transformStyle = "scale-90 opacity-100 bg-gray-300 translate-x-[22dvw] blur-[4px] -z-30";
+              transformStyle = "scale-90 opacity-0 lg:opacity-100 bg-gray-300 translate-x-[80dvw] lg:translate-x-[22dvw] blur-[4px] -z-30";
             } else {
               // Any other item not visible
               transformStyle = "scale-75 opacity-0";
@@ -138,8 +138,8 @@ const ServiceList = () => {
                 onClick={() => openModal(service)}
               >
                 <div className="h-full w-full flex flex-col justify-evenly items-center">
-                  <h3 className="text-2xl text-rws-dark-blue font-semibold mb-4">{service.title}</h3>
-                  <p className="text-rws-gray">{service.desc}</p>
+                  <h3 className="text-lg lg:text-2xl text-rws-dark-blue font-semibold mb-4">{service.title}</h3>
+                  <p className="text-rws-gray text-sm lg:text-lg">{service.desc}</p>
                 </div>
               </div>
             );
@@ -179,7 +179,7 @@ const ServiceList = () => {
           } bg-black z-50`}
         >
           {selectedService && (
-            <div className="flex justify-between flex-col items-center bg-rws-smoke p-8 rounded-2xl shadow-lg w-[50vw] h-[25dvh] relative ">
+            <div className="flex justify-between flex-col items-center bg-rws-smoke p-8 rounded-2xl shadow-lg w-[90dvw] lg:w-[50vw] h-[70dvh] lg:h-[25dvh] relative ">
               <h3 className="text-3xl font-bold text-rws-dark-blue mb-4">{selectedService.title}</h3>
               <p className="text-rws-gray text-lg mb-6">{selectedService.description}</p>
               <button
