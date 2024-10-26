@@ -1,14 +1,44 @@
 import React, { useState } from 'react';
 
 const Contact = () => {
-    // State for managing the message and the character count
     const [message, setMessage] = useState('');
+    const [name, setName] = useState('');
+    const [email, setEmail] = useState('');
+    const [successMessage, setSuccessMessage] = useState('');
+    const [errorMessage, setErrorMessage] = useState('');
     const maxChars = 500;
 
-    // Handle change in the message textarea
-    const handleMessageChange = (e) => {
-        setMessage(e.target.value);
+    const handleMessageChange = (e) => setMessage(e.target.value);
+    const handleNameChange = (e) => setName(e.target.value);
+    const handleEmailChange = (e) => setEmail(e.target.value);
+
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        setSuccessMessage('');
+        setErrorMessage('');
+    
+        try {
+            const response = await fetch('https://rustyws.com/api/send-email', { // Use the correct path
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ name, email, message }),
+            });
+    
+            if (response.ok) {
+                setSuccessMessage('Message sent successfully!');
+                setName('');
+                setEmail('');
+                setMessage('');
+            } else {
+                setErrorMessage('Failed to send message.');
+            }
+        } catch (error) {
+            setErrorMessage('An error occurred. Please try again.');
+        }
     };
+    
 
     return (
         <section className='mx-auto flex justify-center items-center w-full mb-12 lg:mb-[5.5rem]'>
@@ -19,13 +49,12 @@ const Contact = () => {
                 </h1>
                 <p className='text-sm text-rws-gray opacity-80'>* indicates required field</p>
                 
-                {/* Contact Form */}
-                <form className='flex flex-col w-full justify-center'>
+                <form className='flex flex-col w-full justify-center' onSubmit={handleSubmit}>
                     <label htmlFor='name' className='text-rws-dark-blue text-lg font-bold'>Name *</label>
-                    <input type='text' id='name' name='name' placeholder='Jane Doe' className='border-2 border-rws-dark-blue rounded-lg p-2 my-2 text-ellipsis' required />
+                    <input type='text' id='name' name='name' placeholder='Jane Doe' value={name} onChange={handleNameChange} className='border-2 border-rws-dark-blue rounded-lg p-2 my-2' required />
                     
                     <label htmlFor='email' className='text-rws-dark-blue text-lg font-bold'>Email *</label>
-                    <input type='email' id='email' name='email' placeholder='example@email.com' className='border-2 border-rws-dark-blue rounded-lg p-2 my-2 text-ellipsis' required />
+                    <input type='email' id='email' name='email' placeholder='example@email.com' value={email} onChange={handleEmailChange} className='border-2 border-rws-dark-blue rounded-lg p-2 my-2' required />
                     
                     <label htmlFor='message' className='text-rws-dark-blue text-lg font-bold'>Message *</label>
                     <textarea 
@@ -33,7 +62,7 @@ const Contact = () => {
                         name='message' 
                         rows="5" 
                         placeholder='Enter your message here...' 
-                        className='border-2 border-rws-dark-blue rounded-lg p-2 my-2 text-ellipsis'
+                        className='border-2 border-rws-dark-blue rounded-lg p-2 my-2'
                         maxLength={maxChars}
                         value={message}
                         onChange={handleMessageChange}
@@ -44,14 +73,13 @@ const Contact = () => {
                     </div>
                     
                     <button type='submit' className='bg-rws-dark-blue text-white rounded-lg py-2 px-4 my-2 w-fit hover:bg-rws-light-blue transition-all duration-500'>Submit</button>
+
+                    {successMessage && <p className='text-green-500'>{successMessage}</p>}
+                    {errorMessage && <p className='text-red-500'>{errorMessage}</p>}
                 </form>
-            
-            </div>
-            <div id="contact" className="text-transparent absolute left-0">
-                <p>Invisible About Us Tag</p>
             </div>
         </section>
-    )
+    );
 };
 
 export default Contact;

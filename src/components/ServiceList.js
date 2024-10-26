@@ -105,7 +105,7 @@ const ServiceList = () => {
 
             // Styles for different items
             let itemClasses =
-              "bg-rws-smoke absolute p-6 mt-6 rounded-2xl shadow-md transition-all duration-1000 ease-in-out transform w-[65dvw] lg:w-[23dvw] h-fit lg:h-[21dvh]";
+              "bg-rws-smoke absolute p-6 mt-6 rounded-2xl shadow-md transition-all duration-1000 ease-in-out transform w-[65dvw] lg:w-[25dvw] h-fit";
             let transformStyle = "";
 
             if (offset === 0) {
