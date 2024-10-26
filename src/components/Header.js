@@ -43,7 +43,7 @@ const Header = () => {
 
   return (
     <header
-      className={`w-full ${
+      className={`mx-auto w-[100dvw] ${
         isScrolled ? "h-[10dvh] sm:h-[8dvh]" : "h-[16dvh] sm:h-[12dvh]"
       } flex items-center justify-center transition-all duration-300`}
     >

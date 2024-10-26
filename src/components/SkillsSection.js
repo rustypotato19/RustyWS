@@ -108,7 +108,7 @@ const SkillsSection = () => {
   };
 
   return (
-    <section className="mx-auto skills p-12 flex justify-center items-center w-full mb-6">
+    <section className="mx-auto skills p-12 flex justify-center items-center w-full lg:mb-6">
         <div className="w-full text-center flex flex-col justify-center items-center">
           <h2 className="w-[90dvw] lg:w-[70dvw] text-2xl lg:text-3xl text-rws-smoke font-bold bg-rws-dark-blue rounded-full py-2 mb-12"
             style={{
@@ -117,7 +117,7 @@ const SkillsSection = () => {
           >
             Our Skills
           </h2>
-          <ul className={`w-[85dvw] lg:w-[70dvw] flex items-center gap-2 lg:gap-8 justify-center flex-row flex-wrap mt-8 mb-4 ${focusedSkill !== null ? 'blur-sm' : ''}`}>
+          <ul className={`w-[85dvw] lg:w-[70dvw] flex items-center gap-2 lg:gap-8 justify-center flex-row flex-wrap mt-4 mb-2 lg:mt-8 lg:mb-4 ${focusedSkill !== null ? 'blur-sm' : ''}`}>
             {skills.map((skill, index) => (
               <li
                 key={index}

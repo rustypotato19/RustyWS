@@ -11,7 +11,7 @@ const Contact = () => {
     };
 
     return (
-        <section className='mx-auto flex justify-center items-center w-full mb-[5.5rem]'>
+        <section className='mx-auto flex justify-center items-center w-full mb-12 lg:mb-[5.5rem]'>
             <div className='flex flex-col justify-center items-center h-full w-[90dvw] lg:w-[60dvw] transition-all duration-200 border border-rws-dark-blue rounded-3xl py-3 px-6 lg:py-6 lg:px-12'>
                 
                 <h1 className="text-center text-3xl text-rws-dark-blue rounded-full font-bold py-1 lg:py-2 w-full">

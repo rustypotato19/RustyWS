@@ -86,7 +86,7 @@ const ServiceList = () => {
   };
 
   return (
-    <section className="cursor-default py-10">
+    <section className="cursor-default py-4 lg:py-10">
       <div className="container mx-auto text-center">
         <h2
           className="mx-auto text-2xl lg:text-3xl text-rws-smoke bg-rws-dark-blue rounded-full font-bold py-2 w-[90dvw] lg:w-[70dvw]"
@@ -98,7 +98,7 @@ const ServiceList = () => {
         </h2>
 
         {/* Service Items Carousel */}
-        <div className="relative flex items-center justify-center overflow-hidden h-[40dvh] lg:h-[32dvh] mb-6 mt-12">
+        <div className="relative flex items-center justify-center overflow-hidden h-[40dvh] lg:h-[32dvh] lg:mb-6 lg:mt-12">
           {services.map((service, index) => {
             // Calculate the offset relative to currentIndex
             const offset = (index - currentIndex + services.length) % services.length;
@@ -147,7 +147,7 @@ const ServiceList = () => {
         </div>
 
         {/* Dots Indicator */}
-        <div className="flex flex-row justify-center items-center ">
+        <div className="flex flex-row justify-center items-center mt-3">
           <p
             onClick={goToPrevious}
             className="text-4xl font-bold text-rws-gray opacity-60 cursor-pointer hover:text-rws-dark-blue relative right-2 bottom-[7px]"
