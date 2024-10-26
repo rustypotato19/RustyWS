@@ -74,7 +74,7 @@ const Contact = () => {
                     
                     <button type='submit' className='bg-rws-dark-blue text-white rounded-lg py-2 px-4 my-2 w-fit hover:bg-rws-light-blue transition-all duration-500'>Submit</button>
 
-                    {successMessage && <p className='text-green-500'>{successMessage}</p>}
+                    {successMessage && <p className='text-green-700'>{successMessage}</p>}
                     {errorMessage && <p className='text-red-500'>{errorMessage}</p>}
                 </form>
             </div>
