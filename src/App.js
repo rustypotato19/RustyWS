@@ -8,6 +8,7 @@ import AdminDashboard from "./components/AdminDashboard";
 import RequestsPage from "./components/RequestsPage";
 import ViewTicketPage from "./components/ViewTicketPage";
 import Legal from "./components/Legal";
+import Products from "./components/Products";
 
 function App() {
   return (
@@ -31,20 +32,29 @@ function App() {
           }
         />
 
-        <Route 
-          path="/view-ticket" 
+        <Route
+          path="/view-ticket"
           element={
             <MainLayout>
               <ViewTicketPage />
             </MainLayout>
-          } 
+          }
         />
 
-        <Route 
+        <Route
           path="/legal-stuff"
           element={
             <MainLayout>
               <Legal />
+            </MainLayout>
+          }
+        />
+
+        <Route
+          path="/products"
+          element={
+            <MainLayout>
+              <Products />
             </MainLayout>
           }
         />
@@ -66,9 +76,6 @@ function App() {
             </AdminLayout>
           }
         />
-
-
-        
       </Routes>
     </Router>
   );

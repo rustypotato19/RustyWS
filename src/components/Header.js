@@ -112,6 +112,14 @@ const Header = () => {
                 Contact
               </a>
             </li>
+            <li>
+              <a
+                href="/products"
+                className="block text-rws-smoke border-b-2 border-transparent pb-2 hover:border-rws-back-blue hover:text-rws-back-blue"
+              >
+                Products
+              </a>
+            </li>
           </ul>
           {isSmallDevice && (
             <ul
@@ -148,6 +156,14 @@ const Header = () => {
                   className="block text-rws-smoke border-b-2 border-transparent pb-2 hover:border-rws-back-blue hover:text-rws-back-blue"
                 >
                   Contact
+                </a>
+              </li>
+              <li>
+                <a
+                  href="/products"
+                  className="block text-rws-smoke border-b-2 border-transparent pb-2 hover:border-rws-back-blue hover:text-rws-back-blue"
+                >
+                  Products
                 </a>
               </li>
             </ul>
