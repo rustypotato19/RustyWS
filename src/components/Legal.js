@@ -2,7 +2,7 @@ import React from "react";
 
 const Legal = () => {
   return (
-    <div className="container mx-auto px-4 py-8 w-[75dvw]">
+    <div className="container mx-auto px-4 py-8 w-[95dvw] lg:w-[75dvw]">
       <div id="tos"></div>
       <h1 className="text-4xl font-bold mb-8 text-center">Legal Information</h1>
 

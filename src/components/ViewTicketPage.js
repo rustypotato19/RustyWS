@@ -45,7 +45,7 @@ const ViewTicketPage = () => {
             onChange={handleInputChange}
             className="mb-4 p-2 rounded-lg w-full border border-gray-300 outline-none focus:ring-2 focus:ring-rws-dark-blue"
           />
-      
+
           <button
             onClick={handleSearch}
             className="bg-rws-dark-blue hover:bg-rws-dark-blue-hover text-white px-4 py-2 rounded-lg mb-4 ml-2"
@@ -57,7 +57,9 @@ const ViewTicketPage = () => {
         {error && <p className="text-red-500">{error}</p>}
         {ticketData && (
           <div className="bg-white p-6 rounded-lg shadow-lg">
-            <h3 className="text-xl font-bold mb-2">{ticketData.request_type}</h3>
+            <h3 className="text-xl font-bold mb-2">
+              {ticketData.request_type}
+            </h3>
             <p>
               <strong>Priority:</strong> {ticketData.priority}
             </p>
