@@ -1,31 +1,31 @@
-import React, { useState } from 'react';
-import axios from 'axios';  
-import { useNavigate } from 'react-router-dom'; 
+import React, { useState } from "react";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 const AdminLogin = () => {
-  const [username, setUsername] = useState(''); // Add username state
-  const [password, setPassword] = useState('');
-  const [error, setError] = useState('');
+  const [username, setUsername] = useState(""); // Add username state
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
   const navigate = useNavigate();
 
   const handleLogin = async () => {
     try {
       // Make a POST request to the login API with username and password
       const response = await axios.post(
-        'https://rustyws.com/api/admin/login',
-        { username, password },  // Send both username and password
+        "https://rustyws.com/api/admin/login",
+        { username, password }, // Send both username and password
         { withCredentials: true }
       );
 
       // If login is successful, store the JWT token in localStorage
-      localStorage.setItem('token', response.data.token);
-  
+      localStorage.setItem("token", response.data.token);
+
       // Redirect to the admin dashboard
-      navigate('/admin-dashboard');
+      navigate("/admin-dashboard");
     } catch (err) {
       // Handle error if login fails
-      setError('Incorrect username or password');
-      console.error('Login error:', err);
+      setError("Incorrect username or password");
+      console.error("Login error:", err);
     }
   };
 
@@ -33,7 +33,7 @@ const AdminLogin = () => {
     <div className="container mx-auto p-4">
       <h1 className="text-3xl font-bold mb-4">Admin Login</h1>
       <input
-        type="text"  // New input for username
+        type="text" // New input for username
         placeholder="Enter admin username"
         value={username}
         onChange={(e) => setUsername(e.target.value)}

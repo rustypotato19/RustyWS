@@ -68,7 +68,9 @@ const Header = () => {
           />
           <h1
             className={`text-rws-smoke font-bold transition-all duration-300 ${
-              isScrolled ? "text-md sm:text-lg md-text-xl lg:text-2xl" : "text-lg sm:text-xl md:text-2xl xl:text-4xl"
+              isScrolled
+                ? "text-md sm:text-lg md-text-xl lg:text-2xl"
+                : "text-lg sm:text-xl md:text-2xl xl:text-4xl"
             } mt-1 sm:ml-2`}
           >
             Rusty's Web Services
@@ -114,7 +116,11 @@ const Header = () => {
           {isSmallDevice && (
             <ul
               className={`${
-                isMenuOpen ?  (isScrolled ? "-translate-y-[4dvh]" : "translate-y-0") : "-translate-y-[175%]"
+                isMenuOpen
+                  ? isScrolled
+                    ? "-translate-y-[4dvh]"
+                    : "translate-y-0"
+                  : "-translate-y-[175%]"
               } transition-all duration-500 sm:hidden absolute top-[9.5dvh] right-4 bg-opacity-80 text-center bg-rws-dark-blue rounded-b-lg shadow-lg p-4 space-y-2 -z-50`}
               style={{
                 boxShadow: "0px 4px 6px rgba(0, 0, 0, 0.4)",

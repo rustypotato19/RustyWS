@@ -28,11 +28,9 @@ const AdminDashboard = () => {
         .catch((err) => {
           if (err.response && err.response.status === 401) {
             navigate("/admin-login");
-          }
-          else if (err.response && err.response.status === 403){
+          } else if (err.response && err.response.status === 403) {
             navigate("/admin-login");
-          } 
-          else {
+          } else {
             setError("Error fetching requests.");
             console.error(err);
           }
@@ -80,7 +78,9 @@ const AdminDashboard = () => {
       );
       setRequests((prev) =>
         prev.map((req) =>
-          req.ticket_id === ticketId ? { ...req, contacted: contactedStatus } : req
+          req.ticket_id === ticketId
+            ? { ...req, contacted: contactedStatus }
+            : req
         )
       );
     } catch (err) {
@@ -138,7 +138,7 @@ const AdminDashboard = () => {
         />
         <button
           onClick={handleSortByDate}
-          className="flex items-center justify-center flex-row bg-blue-500 text-white text-sm px-4 py-2 ml-2 rounded-lg" 
+          className="flex items-center justify-center flex-row bg-blue-500 text-white text-sm px-4 py-2 ml-2 rounded-lg"
         >
           Sort: {sortByDate ? "Oldest" : "Newest"}
         </button>
@@ -160,12 +160,17 @@ const AdminDashboard = () => {
         <tbody>
           {filteredRequests.length === 0 ? (
             <tr>
-              <td colSpan="8" className="text-center py-4">No requests found</td>
+              <td colSpan="8" className="text-center py-4">
+                No requests found
+              </td>
             </tr>
           ) : (
             filteredRequests.map((request) => (
               <tr key={request.ticket_id} className="text-center">
-                <td className="py-2 px-3 border-b cursor-pointer" onClick={() => openModal(request)}>
+                <td
+                  className="py-2 px-3 border-b cursor-pointer"
+                  onClick={() => openModal(request)}
+                >
                   {request.ticket_id}
                 </td>
                 <td className="py-2 px-3 border-b">{request.contact_info}</td>
@@ -175,16 +180,22 @@ const AdminDashboard = () => {
                   {new Date(request.request_date).toLocaleDateString()}
                 </td>
                 <td className="py-2 px-3 border-b">{request.status}</td>
-                <td className="py-2 px-3 border-b">{request.contacted ? "Yes" : "No"}</td>
+                <td className="py-2 px-3 border-b">
+                  {request.contacted ? "Yes" : "No"}
+                </td>
                 <td className="py-4 px-3 border-b">
                   <select
                     className="p-2 rounded bg-gray-200"
                     onChange={(e) => {
                       const value = e.target.value;
-                      if (value === "started") updateStatus(request.ticket_id, "in_progress");
-                      else if (value === "finished") updateStatus(request.ticket_id, "finished");
-                      else if (value === "contacted") updateContacted(request.ticket_id, 1);
-                      else if (value === "delete") deleteEntry(request.ticket_id);
+                      if (value === "started")
+                        updateStatus(request.ticket_id, "in_progress");
+                      else if (value === "finished")
+                        updateStatus(request.ticket_id, "finished");
+                      else if (value === "contacted")
+                        updateContacted(request.ticket_id, 1);
+                      else if (value === "delete")
+                        deleteEntry(request.ticket_id);
                     }}
                   >
                     <option value="">Select Action</option>
@@ -205,18 +216,39 @@ const AdminDashboard = () => {
           <div className="fixed inset-0 flex items-center justify-center bg-gray-900 bg-opacity-50">
             <div className="bg-white p-6 rounded shadow-md max-w-3xl w-full max-h-[80vh] overflow-auto">
               <h2 className="text-xl font-bold mb-4">Request Details</h2>
-              <p><strong>Ticket ID:</strong> {modalRequest.ticket_id}</p>
-              <p><strong>Contact Info:</strong> {modalRequest.contact_info}</p>
-              <p><strong>Request Type:</strong> {modalRequest.request_type}</p>
-              <p><strong>Priority:</strong> {modalRequest.priority}</p>
-              <p><strong>Description:</strong></p>
+              <p>
+                <strong>Ticket ID:</strong> {modalRequest.ticket_id}
+              </p>
+              <p>
+                <strong>Contact Info:</strong> {modalRequest.contact_info}
+              </p>
+              <p>
+                <strong>Request Type:</strong> {modalRequest.request_type}
+              </p>
+              <p>
+                <strong>Priority:</strong> {modalRequest.priority}
+              </p>
+              <p>
+                <strong>Description:</strong>
+              </p>
               <div className="bg-gray-100 p-4 rounded-lg mb-4 overflow-auto max-h-[30vh] break-words">
                 {modalRequest.description}
               </div>
-              <p><strong>Date:</strong> {new Date(modalRequest.request_date).toLocaleDateString()}</p>
-              <p><strong>Status:</strong> {modalRequest.status}</p>
-              <p><strong>Contacted:</strong> {modalRequest.contacted ? "Yes" : "No"}</p>
-              <button className="bg-red-500 text-white px-4 py-2 mt-4 rounded" onClick={closeModal}>
+              <p>
+                <strong>Date:</strong>{" "}
+                {new Date(modalRequest.request_date).toLocaleDateString()}
+              </p>
+              <p>
+                <strong>Status:</strong> {modalRequest.status}
+              </p>
+              <p>
+                <strong>Contacted:</strong>{" "}
+                {modalRequest.contacted ? "Yes" : "No"}
+              </p>
+              <button
+                className="bg-red-500 text-white px-4 py-2 mt-4 rounded"
+                onClick={closeModal}
+              >
                 Close
               </button>
             </div>

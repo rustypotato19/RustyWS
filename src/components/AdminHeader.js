@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
-import axios from 'axios';
+import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
 const AdminHeader = () => {
   const navigate = useNavigate();
@@ -10,19 +10,24 @@ const AdminHeader = () => {
 
   useEffect(() => {
     const fetchNotifications = async () => {
-      const token = localStorage.getItem('token');
+      const token = localStorage.getItem("token");
 
       try {
-        const response = await axios.get('https://rustyws.com/api/admin/notifications', {
-          headers: { Authorization: `Bearer ${token}` },
-        });
+        const response = await axios.get(
+          "https://rustyws.com/api/admin/notifications",
+          {
+            headers: { Authorization: `Bearer ${token}` },
+          }
+        );
         setNotifications(response.data);
 
         // Count unread notifications
-        const unreadNotifications = response.data.filter(notification => notification.read_status === 0);
+        const unreadNotifications = response.data.filter(
+          (notification) => notification.read_status === 0
+        );
         setUnreadCount(unreadNotifications.length);
       } catch (error) {
-        console.error('Error fetching notifications:', error);
+        console.error("Error fetching notifications:", error);
       }
     };
 
@@ -37,22 +42,26 @@ const AdminHeader = () => {
     if (unreadCount > 0) {
       document.title = `(${unreadCount}) Admin Dashboard`;
     } else {
-      document.title = 'Admin Dashboard';
+      document.title = "Admin Dashboard";
     }
   }, [unreadCount]);
 
   const handleLogout = () => {
-    localStorage.removeItem('token');
-    navigate('/admin-login');
+    localStorage.removeItem("token");
+    navigate("/admin-login");
   };
 
   const markNotificationsAsRead = async () => {
     try {
-      const token = localStorage.getItem('token');
+      const token = localStorage.getItem("token");
 
-      await axios.put('https://rustyws.com/api/admin/notifications/mark-read', {}, {
-        headers: { Authorization: `Bearer ${token}` },
-      });
+      await axios.put(
+        "https://rustyws.com/api/admin/notifications/mark-read",
+        {},
+        {
+          headers: { Authorization: `Bearer ${token}` },
+        }
+      );
 
       setUnreadCount(0);
       const updatedNotifications = notifications.map((notification) => ({
@@ -61,7 +70,7 @@ const AdminHeader = () => {
       }));
       setNotifications(updatedNotifications);
     } catch (err) {
-      console.error('Error marking notifications as read:', err);
+      console.error("Error marking notifications as read:", err);
     }
   };
 
@@ -79,7 +88,7 @@ const AdminHeader = () => {
 
         <div className="flex items-center space-x-4">
           <button
-            onClick={() => navigate('/')}
+            onClick={() => navigate("/")}
             className="font-bold bg-green-900 hover:bg-green-800 px-4 py-2 rounded-lg"
           >
             Home
@@ -88,7 +97,10 @@ const AdminHeader = () => {
           {/* Notifications Dropdown */}
           <div className="relative">
             <button
-              onClick={() => { setShowDropdown(!showDropdown); markNotificationsAsRead(); }}
+              onClick={() => {
+                setShowDropdown(!showDropdown);
+                markNotificationsAsRead();
+              }}
               className="font-bold bg-blue-900 hover:bg-blue-800 px-4 py-2 rounded-lg relative"
             >
               Notifications
@@ -103,7 +115,14 @@ const AdminHeader = () => {
               <div className="absolute right-0 mt-2 w-64 bg-white text-black rounded-lg shadow-lg">
                 {notifications.length > 0 ? (
                   notifications.map((notification) => (
-                    <div key={notification.id} className={`p-2 ${notification.read_status === 0 ? 'bg-gray-100' : 'bg-gray-200'}`}>
+                    <div
+                      key={notification.id}
+                      className={`p-2 ${
+                        notification.read_status === 0
+                          ? "bg-gray-100"
+                          : "bg-gray-200"
+                      }`}
+                    >
                       {notification.message}
                     </div>
                   ))
