@@ -171,14 +171,14 @@ const AdminDashboard: React.FC = () => {
           placeholder="Filter by contact, status, request type, priority, or ticket ID..."
           value={filter}
           onChange={handleFilter}
-          className="mb-4 md:mb-0 p-2 border-4 border-green-700 bg-neutral-200 rounded-lg w-full md:w-1/2"
+          className="mb-4 md:mb-0 p-2 border-4 border-green-700 bg-neutral-900 placeholder:text-neutral-200 rounded-lg w-full md:w-1/2"
         />
         <select
           onChange={handleSort}
           value={sortBy}
-          className="p-2 border-4 border-green-700 bg-neutral-200 rounded-lg ml-2 w-full md:w-auto"
+          className="p-2 border-4 border-green-700 text-neutral-200 bg-neutral-900 rounded-lg ml-2 w-full md:w-auto"
         >
-          <option value="">Sort By</option>
+          <option value="">Sort By...</option>
           <option value="date_asc">Date: Oldest to Newest</option>
           <option value="date_desc">Date: Newest to Oldest</option>
           <option value="priority">Priority</option>
@@ -233,7 +233,7 @@ const AdminDashboard: React.FC = () => {
                 </td>
                 <td className="py-4 px-3 border-b flex justify-center items-center gap-4">
                   <select
-                    className="p-2 rounded bg-neutral-200 text-black"
+                    className="p-2 rounded bg-neutral-900 text-white font-bold"
                     onChange={(e) => {
                       const value = e.target.value;
                       if (value === "started")
@@ -244,7 +244,7 @@ const AdminDashboard: React.FC = () => {
                         updateContacted(request.ticket_id, true);
                     }}
                   >
-                    <option value="">Select Action</option>
+                    <option value="">Action..</option>
                     <option value="started">Started</option>
                     <option value="finished">Finished</option>
                     <option value="contacted">Contacted</option>
@@ -265,7 +265,7 @@ const AdminDashboard: React.FC = () => {
       {isModalOpen && modalRequest && (
         <div className="w-full flex justify-center items-center">
           <div className="fixed inset-0 flex items-center justify-center bg-gray-900 bg-opacity-50">
-            <div className="bg-neutral-200 p-6 rounded-xl border-4 border-green-700 shadow-md max-w-3xl w-full max-h-[80vh] overflow-auto">
+            <div className="bg-neutral-700 text-white p-6 rounded-xl border-4 border-green-700 shadow-md max-w-3xl w-full max-h-[80vh] overflow-auto">
               <h2 className="text-xl font-bold mb-4">Request Details</h2>
               <p>
                 <strong>Ticket ID:</strong> {modalRequest.ticket_id}
@@ -282,7 +282,7 @@ const AdminDashboard: React.FC = () => {
               <p>
                 <strong>Description:</strong>
               </p>
-              <div className="bg-neutral-400 p-4 rounded-lg mb-4 overflow-auto max-h-[30vh] break-words">
+              <div className="bg-neutral-800 border-2 border-green-700 p-4 rounded-lg my-4 overflow-auto max-h-[30vh] break-words">
                 {modalRequest.description}
               </div>
               <p>

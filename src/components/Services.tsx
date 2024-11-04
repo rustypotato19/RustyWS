@@ -3,6 +3,7 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import { Pagination, Autoplay } from "swiper/modules";
 import { Swiper as SwiperInstance } from "swiper/types";
 import { motion, AnimatePresence } from "framer-motion";
+import { useInView } from "react-intersection-observer"; // Updated Import
 import "swiper/css";
 import "swiper/css/pagination";
 import "./Services.css";
@@ -29,12 +30,6 @@ const Services: React.FC = () => {
       detailedDescription:
         "With responsive design optimisation, we make sure that your website looks great and performs flawlessly across all devices, ensuring a seamless experience for your users on desktops, tablets, and smartphones.",
     },
-    /* {
-      title: "Consulting and Strategy Planning",
-      shortDescription: "Expert guidance for a successful digital strategy.",
-      detailedDescription:
-        "We offer consulting and strategy planning services to help you navigate the complex digital landscape. Our experts work closely with you to develop actionable plans that align with your goals and drive growth.",
-    }, */
     {
       title: "E-commerce Solutions",
       shortDescription: "Boost your sales with powerful online stores.",
@@ -62,14 +57,26 @@ const Services: React.FC = () => {
     },
   ];
 
+  // useInView from react-intersection-observer
+  const { ref: sectionRef, inView } = useInView({
+    triggerOnce: true, // Only trigger animation once when it comes into view
+    threshold: 0.2, // 20% of the component should be visible before it triggers
+  });
+
   return (
-    <div
-      id="services"
-      className="min-h-[50vh] w-screen text-white px-10 py-12 my-8 flex justify-center items-center"
-      data-aos="fade-up"
-      data-aos-delay="200"
+    <motion.div
+      ref={sectionRef}
+      className="min-h-[40vh] w-screen text-white px-10 py-12 my-8 flex justify-center items-center"
+      initial={{ opacity: 0, x: -50 }}
+      animate={inView ? { opacity: 1, x: 0 } : {}}
+      transition={{ duration: 0.7, ease: "easeInOut" }}
     >
-      <div className="max-w-full sm:max-w-[40vw] mx-auto flex flex-col justify-center items-center gap-6">
+      <motion.div
+        className="max-w-full sm:max-w-[40vw] mx-auto flex flex-col justify-center items-center gap-6"
+        initial={{ opacity: 0, x: -50 }}
+        animate={inView ? { opacity: 1, x: 0 } : {}}
+        transition={{ duration: 0.7, ease: "easeInOut", delay: 0.3 }}
+      >
         <h2 className="text-3xl font-bold mb-6">Our Services</h2>
         <Swiper
           modules={[Pagination, Autoplay]}
@@ -155,8 +162,8 @@ const Services: React.FC = () => {
             </SwiperSlide>
           ))}
         </Swiper>
-      </div>
-    </div>
+      </motion.div>
+    </motion.div>
   );
 };
 

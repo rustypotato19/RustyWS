@@ -48,7 +48,6 @@ const ContactUs: React.FC = () => {
   return (
     <motion.div
       ref={ref}
-      id="contact"
       className="min-h-[50vh] text-white px-10 py-24 my-12 flex items-center justify-center"
       initial={{ opacity: 0, y: 50 }}
       animate={inView ? { opacity: 1, y: 0 } : {}}

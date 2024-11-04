@@ -66,12 +66,11 @@ const FindTicket: React.FC = () => {
 
   return (
     <section
-      id="view-ticket"
       className="mx-auto w-full h-full flex justify-center items-center py-12"
     >
       <motion.div
         ref={ref}
-        className="mx-auto p-2 lg:p-8 min-h-[50vh] w-full lg:w-[50dvw]"
+        className="mx-auto p-2 lg:p-8 min-h-[30vh] w-full lg:w-[50dvw]"
         initial={{ opacity: 0, x: -50 }}
         animate={inView ? { opacity: 1, x: 0 } : {}}
         transition={{ duration: 0.7, ease: "easeInOut" }}
@@ -163,6 +162,7 @@ const FindTicket: React.FC = () => {
           </motion.div>
         )}
       </motion.div>
+      <p id="contact" className="transparent relative top-44" />
     </section>
   );
 };

@@ -114,7 +114,6 @@ const Request: React.FC = () => {
   return (
     <motion.div
       ref={ref}
-      id="request"
       className="min-h-[50vh] w-screen text-white px-10 py-12 flex justify-center items-center"
       initial={{ opacity: 0, y: 50 }}
       animate={inView ? { opacity: 1, y: 0 } : {}}
@@ -323,6 +322,7 @@ const Request: React.FC = () => {
           </motion.div>
         )}
       </motion.div>
+      <p id="view-ticket" className="transparent relative top-52" />
     </motion.div>
   );
 };

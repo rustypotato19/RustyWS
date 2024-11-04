@@ -103,8 +103,15 @@ const Skills: React.FC = () => {
   };
 
   return (
-    <div className="skills-container text-white px-10 py-24">
-      <h2 className="text-3xl font-bold mb-16 text-center">Our Skills</h2>
+    <div className="h-full w-3/4 mx-auto skills-container text-white px-10 py-24">
+      <motion.h2
+        className="text-3xl font-bold mb-16 text-center"
+        initial={{ opacity: 0, x: -50 }}
+        animate={{ opacity: 1, x: 0 }}
+        transition={{ duration: 0.7, ease: "easeInOut" }}
+      >
+        Our Skills
+      </motion.h2>
       <motion.div
         className="skills-grid grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-6"
         initial="hidden"
@@ -163,6 +170,7 @@ const Skills: React.FC = () => {
           </motion.div>
         ))}
       </motion.div>
+    <p id="request" className="transparent absolute" />
     </div>
   );
 };
