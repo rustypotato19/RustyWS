@@ -1,0 +1,11 @@
+/* Custom styling for Swiper pagination dots */
+.swiper-pagination-bullet {
+    background-color: #2ecc71; /* Green color */
+    opacity: 0.2; /* Adjust opacity as needed */
+  }
+  
+  .swiper-pagination-bullet-active {
+    background-color: #27ae60; /* Darker green for active dot */
+    opacity: 1; /* Fully opaque for the active bullet */
+  }
+  
