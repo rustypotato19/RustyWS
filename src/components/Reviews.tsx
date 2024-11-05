@@ -212,6 +212,8 @@ const Reviews: React.FC = () => {
           }}
           onSwiper={(swiper: SwiperInstance) => {
             if (swiper && swiper.autoplay) {
+              swiper.autoplay.start(); // Start autoplay manually when swiper instance is ready
+
               swiper.el.addEventListener("mouseenter", () => {
                 if (swiper.autoplay) swiper.autoplay.stop();
                 setIsFocused(true);
