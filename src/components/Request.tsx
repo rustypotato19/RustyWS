@@ -322,7 +322,7 @@ const Request: React.FC = () => {
           </motion.div>
         )}
       </motion.div>
-      <p id="view-ticket" className="transparent relative top-52" />
+      <p id="tickets" className="transparent relative top-52" />
     </motion.div>
   );
 };

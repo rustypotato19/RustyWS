@@ -162,6 +162,7 @@ const ContactUs: React.FC = () => {
           )}
         </form>
       </motion.div>
+      <p id="reviews" className="transparent relative top-96" />
     </motion.div>
   );
 };
