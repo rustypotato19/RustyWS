@@ -15,6 +15,7 @@ import Skills from "./components/Skills";
 import FindTicket from "./components/TicketViewer";
 import AdminLogin from "./components/AdminLogin";
 import AdminDashboard from "./components/AdminDashboard";
+import Reviews from "./components/Reviews";
 
 const App: React.FC = () => {
   return (
@@ -40,6 +41,8 @@ const App: React.FC = () => {
               <FindTicket />
               <Separator />
               <ContactUs />
+              <Separator />
+              <Reviews />
               <Footer />
             </div>
           }
