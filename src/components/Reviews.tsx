@@ -31,6 +31,7 @@ const Reviews: React.FC = () => {
   const [success, setSuccess] = useState<boolean>(false);
   const [charRemaining, setCharRemaining] = useState<number>(MAX_CHAR_COUNT);
   const [isFocused, setIsFocused] = useState<boolean>(false);
+  const isSmall = window.innerWidth < window.innerHeight;
 
   // Create a reference for the form element
   const formRef = useRef<HTMLFormElement | null>(null);
@@ -179,14 +180,19 @@ const Reviews: React.FC = () => {
         </button>
       </motion.form>
 
-      <motion.p
-        initial={{ opacity: 0, y: 50 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        transition={{ duration: 1 }}
-        className="text-center text-neutral-500 opacity-55 transition-transform duration-300"
-      >
-        * Hint:{!isFocused ? " Click the reviews to pause" : "  Click away to unpause"}
-      </motion.p>
+      {isSmall && (
+        <motion.p
+          initial={{ opacity: 0, y: 50 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 1 }}
+          className="text-center text-neutral-500 opacity-55 transition-transform duration-300"
+        >
+          * Hint:
+          {!isFocused
+            ? " Click the reviews to pause"
+            : "  Click away to unpause"}
+        </motion.p>
+      )}
 
       {/* Reviews Carousel */}
       <div className="w-full max-w-[70vw]">
