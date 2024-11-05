@@ -1,5 +1,4 @@
 import React, { useState, useEffect, useRef } from "react";
-import { useMediaQuery } from "react-responsive";
 import { FaBars } from "react-icons/fa";
 
 const Header: React.FC = () => {
@@ -8,7 +7,7 @@ const Header: React.FC = () => {
   const dropdownRef = useRef<HTMLDivElement>(null);
 
   // Media query to determine if the screen is small
-  const isSmallDevice = useMediaQuery({ query: "(max-width: 768px)" });
+  const isSmallDevice = window.innerWidth < window.innerHeight;
 
   const links = [
     "Home",

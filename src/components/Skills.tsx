@@ -97,13 +97,45 @@ const skillsData = [
 
 const Skills: React.FC = () => {
   const [selectedSkill, setSelectedSkill] = useState<string | null>(null);
+  const [closeTimeout, setCloseTimeout] = useState<number | null>(null); // State to store timeout ID
+  const [isAutoCloseEnabled, setIsAutoCloseEnabled] = useState<boolean>(true); // State to control auto-close
 
   const handleIconClick = (name: string) => {
+    // Set selected skill
     setSelectedSkill(selectedSkill === name ? null : name);
+
+    // Clear existing timeouts if any
+    if (closeTimeout) {
+      clearTimeout(closeTimeout);
+    }
+
+    // Set a new timeout to close the modal after 5 seconds if auto-close is enabled
+    if (isAutoCloseEnabled && selectedSkill !== name) {
+      const newTimeout = window.setTimeout(closeModal, 5000);
+      setCloseTimeout(newTimeout);
+    }
   };
 
+  // Function to close the modal
+  const closeModal = () => {
+    setSelectedSkill(null);
+    if (closeTimeout) {
+      clearTimeout(closeTimeout);
+      setCloseTimeout(null);
+    }
+  };
+
+  // Function to toggle auto-close feature
+  const toggleAutoClose = () => {
+    setIsAutoCloseEnabled(!isAutoCloseEnabled);
+  };
+
+  const selectedSkillData = skillsData.find(
+    (skill) => skill.name === selectedSkill
+  );
+
   return (
-    <div className="h-full w-3/4 mx-auto skills-container text-white px-10 py-24">
+    <div className="h-full w-3/4 mx-auto skills-container text-white px-10 py-24 transition-all duration-500 relative">
       <motion.h2
         className="text-3xl font-bold mb-16 text-center"
         initial={{ opacity: 0, x: -50 }}
@@ -113,7 +145,7 @@ const Skills: React.FC = () => {
         Our Skills
       </motion.h2>
       <motion.div
-        className="skills-grid grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-6"
+        className="skills-grid grid grid-cols-3 md:grid-cols-5 gap-6 transition-all duration-500"
         initial="hidden"
         whileInView="visible"
         viewport={{ once: true, amount: 0.3 }}
@@ -121,56 +153,78 @@ const Skills: React.FC = () => {
           hidden: {},
           visible: {
             transition: {
-              staggerChildren: 0.1, // Control how fast the items slide in after each other
+              staggerChildren: 0.075,
             },
           },
         }}
       >
-        {skillsData.map((skill, index) => (
+        {skillsData.map((skill) => (
           <motion.div
             key={skill.name}
-            className="skill-icon flex flex-col items-center cursor-pointer"
-            whileHover={{ scale: 1.1 }} // Slight scale-up when hovering over the icon
-            transition={{ type: "spring", stiffness: 300, damping: 20 }} // Smooth transition on hover
+            className="skill-icon flex flex-col items-center cursor-pointer relative"
+            whileHover={{ scale: 1.1 }}
+            transition={{ type: "spring", stiffness: 300, damping: 20 }}
             variants={{
               hidden: { opacity: 0, y: 20 },
               visible: { opacity: 1, y: 0 },
-            }} // Animation for each individual skill icon
+            }}
+            onClick={() => handleIconClick(skill.name)}
           >
             <motion.img
               src={skill.img}
               alt={skill.name}
               className="h-20 w-20 object-contain transition-all duration-300"
-              onClick={() => handleIconClick(skill.name)}
-              whileHover={{ rotate: 5 }} // Add a little rotation effect on hover for fun
+              whileHover={{ rotate: 5 }}
             />
             <p className="mt-2 text-center font-semibold">{skill.name}</p>
-            <AnimatePresence>
-              {selectedSkill === skill.name && (
-                <motion.div
-                  key={skill.name}
-                  initial={{ opacity: 0, y: 10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: 10 }}
-                  transition={{ duration: 0.5, ease: "easeInOut" }} // Smooth entrance/exit animations for the details
-                  className="skill-description mt-4 p-4 border-t border-green-700 bg-neutral-800 rounded-lg text-sm"
-                >
-                  <p className="mb-2">{skill.description}</p>
-                  <a
-                    href={skill.link}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-green-400 underline hover:text-green-600"
-                  >
-                    Learn More
-                  </a>
-                </motion.div>
-              )}
-            </AnimatePresence>
           </motion.div>
         ))}
       </motion.div>
-    <p id="request" className="transparent absolute" />
+
+      {/* Skill Information Modal */}
+      <AnimatePresence>
+        {selectedSkillData && (
+          <motion.div
+            key={selectedSkillData.name}
+            initial={{ x: "100%", opacity: 0 }}
+            animate={{ x: "0%", opacity: 1 }}
+            exit={{ x: "100%", opacity: 0 }}
+            transition={{ duration: 0.5, ease: "easeInOut" }}
+            className="skill-modal fixed top-[5vh] right-0 z-30 w-[350px] max-w-full h-[90vh] flex items-center justify-center p-6 text-white border-l-[6px] border-y-[1px] border-green-700 rounded-l-lg shadow-lg overflow-y-auto bg-neutral-800"
+            style={{ transform: "translateY(-50%)" }}
+          >
+            <div className="relative w-full">
+              <button
+                className="absolute -top-10 -left-1 text-3xl text-gray-400 hover:text-white"
+                onClick={closeModal}
+              >
+                &times;
+              </button>
+              <h3 className="text-xl font-semibold mb-4">
+                {selectedSkillData.name}
+              </h3>
+              <p className="mb-4">{selectedSkillData.description}</p>
+              <a
+                href={selectedSkillData.link}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-green-400 underline hover:text-green-600"
+              >
+                Learn More
+              </a>
+              <button
+                onClick={toggleAutoClose}
+                className="block mt-4 text-sm text-green-400 underline hover:text-green-600"
+              >
+                {isAutoCloseEnabled
+                  ? "Disable Auto Close"
+                  : "Enable Auto Close"}
+              </button>
+              <p className="text-xs opacity-70">Applies to next open</p>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   );
 };

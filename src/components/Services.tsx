@@ -15,7 +15,7 @@ const Services: React.FC = () => {
   ); // Swiper instance for autoplay control
   const [hasInteracted, setHasInteracted] = useState(false); // Track if user has interacted
 
-  const isSmall = window.innerWidth < 750;
+  const isSmall = window.innerWidth < window.innerHeight;
 
   const services = [
     {
@@ -87,6 +87,7 @@ const Services: React.FC = () => {
             setSwiperInstance(swiper); // Set the swiper instance so we can control it
           }}
           className="w-full"
+          allowTouchMove = {false}
         >
           {services.map((service, index) => (
             <SwiperSlide
@@ -127,14 +128,14 @@ const Services: React.FC = () => {
                     transition={{
                       repeat: Infinity,
                       repeatType: "loop",
-                      duration: 1,
+                      duration: 0.5,
                       ease: "easeInOut",
                     }}
                   >
                     {isSmall ? "* Try Clicking" : "* Try Hovering"}
                   </motion.div>
                 )}
-                <h3 className="text-2xl font-semibold mb-2 text-center">
+                <h3 className="text-2xl font-semibold mb-8 text-center">
                   {service.title}
                 </h3>
                 <p className="text-md mb-4 text-center">

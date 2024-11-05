@@ -325,7 +325,7 @@ const AdminDashboard: React.FC = () => {
                           color2={"#ffd700"}
                         />
                       </td>
-                      <td className="py-2 px-3 border-b max-w-[60vw] text-pretty">
+                      <td className="py-2 px-3 border-b max-w-[50vw] text-pretty overflow-y-auto">
                         {review.review_message.replace(/\n/g, " ")}
                       </td>
                       <td className="py-2 px-3 border-b">

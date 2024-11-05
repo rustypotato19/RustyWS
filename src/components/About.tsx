@@ -69,8 +69,8 @@ const AboutUs: React.FC = () => {
           {isSmall ? (isOpen ? "v " : "> ") : ""} About Us
         </motion.h2>
         <div
-          className={`transition-all duration-500 ease-in-out overflow-hidden ${
-            isOpen ? "max-h-screen" : "max-h-0"
+          className={`about-scroll transition-all duration-500 ease-in-out overflow-x-hidden overflow-scroll sm:overflow-hidden px-4 sm:px-0 ${
+            isOpen ? "max-h-[60vh] rounded-md border-2 border-green-700 py-4" : "max-h-0"
           } sm:max-h-screen`}
         >
           <motion.div
@@ -82,10 +82,12 @@ const AboutUs: React.FC = () => {
             {paragraphs.map((paragraph, index) => (
               <motion.p
                 key={index}
-                className="text-lg mb-4"
+                className="text-base sm:text-lg"
                 variants={childVariants}
               >
                 {paragraph}
+                <br/>
+                <br/>
               </motion.p>
             ))}
           </motion.div>
@@ -128,8 +130,8 @@ const OurMission: React.FC = () => {
           {isSmall ? (isOpen ? "v " : "> ") : ""} Our Mission
         </motion.h3>
         <div
-          className={`transition-all duration-500 ease-in-out overflow-hidden ${
-            isOpen ? "max-h-screen" : "max-h-0"
+          className={`about-scroll transition-all duration-500 ease-in-out overflow-x-hidden overflow-scroll sm:overflow-hidden px-4 sm:px-0 ${
+            isOpen ? "max-h-[60vh] rounded-md border-2 border-green-700 py-4" : "max-h-0"
           } sm:max-h-screen`}
         >
           <motion.div
@@ -141,10 +143,12 @@ const OurMission: React.FC = () => {
             {missionParagraphs.map((paragraph, index) => (
               <motion.p
                 key={index}
-                className="text-lg mb-6"
+                className="text-base sm:text-lg"
                 variants={childVariants}
               >
                 {paragraph}
+                <br/>
+                <br/>
               </motion.p>
             ))}
           </motion.div>

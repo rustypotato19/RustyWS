@@ -17,7 +17,7 @@ interface Review {
   created_at: string;
 }
 
-const MAX_CHAR_COUNT = 75;
+const MAX_CHAR_COUNT = 200;
 
 const Reviews: React.FC = () => {
   const [reviews, setReviews] = useState<Review[]>([]);
@@ -30,6 +30,7 @@ const Reviews: React.FC = () => {
   const [error, setError] = useState<string>("");
   const [success, setSuccess] = useState<boolean>(false);
   const [charRemaining, setCharRemaining] = useState<number>(MAX_CHAR_COUNT);
+  const [isFocused, setIsFocused] = useState<boolean>(false);
 
   // Create a reference for the form element
   const formRef = useRef<HTMLFormElement | null>(null);
@@ -96,6 +97,7 @@ const Reviews: React.FC = () => {
         setNewReview({ username: "", rating: 0, review_message: "" });
         setError("");
         setSuccess(true); // Indicate successful submission
+        setTimeout(() => setSuccess(false), 3000); // Reset success message after 3 seconds
         setCharRemaining(MAX_CHAR_COUNT); // Reset character counter
         // Re-fetch reviews after submission
         const response = await axios.get("https://rustyws.com/api/reviews");
@@ -111,7 +113,14 @@ const Reviews: React.FC = () => {
 
   return (
     <div className="w-screen text-white px-10 py-12 flex flex-col items-center">
-      <h2 className="text-3xl font-bold mb-8">User Reviews</h2>
+      <motion.h2
+        className="text-3xl font-bold mb-8"
+        initial={{ opacity: 0, x: -50 }}
+        animate={inView ? { opacity: 1, x: 0 } : {}}
+        transition={{ duration: 0.7, ease: "easeInOut" }}
+      >
+        User Reviews
+      </motion.h2>
 
       {/* Review Submission Form */}
       <motion.form
@@ -120,7 +129,7 @@ const Reviews: React.FC = () => {
         className="w-full max-w-md bg-neutral-900 p-6 rounded-lg border-2 border-green-700 shadow-lg mb-12"
         initial={{ opacity: 0, x: -50 }}
         animate={inView ? { opacity: 1, x: 0 } : {}}
-        transition={{ duration: 0.7, ease: "easeInOut" }}
+        transition={{ duration: 0.7, ease: "easeInOut", delay: 0.1 }}
       >
         <h3 className="text-xl font-semibold mb-4">Add a Review</h3>
         <div className="mb-4">
@@ -170,6 +179,15 @@ const Reviews: React.FC = () => {
         </button>
       </motion.form>
 
+      <motion.p
+        initial={{ opacity: 0, y: 50 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ duration: 1 }}
+        className="text-center text-neutral-500 opacity-55 transition-transform duration-300"
+      >
+        * Hint:{!isFocused ? " Click the reviews to pause" : "  Click away to unpause"}
+      </motion.p>
+
       {/* Reviews Carousel */}
       <div className="w-full max-w-[70vw]">
         <Swiper
@@ -190,9 +208,11 @@ const Reviews: React.FC = () => {
             if (swiper && swiper.autoplay) {
               swiper.el.addEventListener("mouseenter", () => {
                 if (swiper.autoplay) swiper.autoplay.stop();
+                setIsFocused(true);
               });
               swiper.el.addEventListener("mouseleave", () => {
                 if (swiper.autoplay) swiper.autoplay.start();
+                setIsFocused(false);
               });
             }
           }}
@@ -205,7 +225,7 @@ const Reviews: React.FC = () => {
                     className="bg-neutral-900 border-2 border-green-800 rounded-lg p-6 shadow-md text-center h-[300px] flex flex-col justify-between items-center"
                     initial={{ opacity: 0, y: 50 }}
                     whileInView={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 1, delay: index * 0.3 }} // Sequential animation
+                    transition={{ duration: 1 }}
                     viewport={{ once: true }}
                   >
                     <p className="text-xs text-gray-500">
@@ -214,10 +234,22 @@ const Reviews: React.FC = () => {
                     <h4 className="text-xl font-semibold mb-2">
                       {review.username}
                     </h4>
-                    <div className="little-scroll text-gray-300 text-xl overflow-hidden border-2 border-green-800 border-opacity-55 rounded-xl text-ellipsis overflow-y-auto h-[120px] p-2 mb-2 w-full text-pretty whitespace-pre-wrap break-words">
+                    <div
+                      className={`about-scroll text-gray-300 
+                      ${
+                        review.review_message.length > 50
+                          ? review.review_message.length > 100
+                            ? review.review_message.length > 150
+                              ? "text-[0.75rem] sm:text-xs"
+                              : "text-sm sm:text-base"
+                            : "text-base sm:text-lg"
+                          : "text-lg sm:text-xl"
+                      } 
+                      overflow-hidden border-2 border-green-800 border-opacity-55 rounded-sm text-ellipsis overflow-y-auto h-[120px] p-2 mb-2 w-full text-pretty whitespace-pre-wrap break-words`}
+                    >
                       {review.review_message}
                     </div>
-                    <div className="mb-2">
+                    <div className="sm:mb-2">
                       <ReactStars
                         count={5}
                         value={review.rating}
