@@ -120,7 +120,7 @@ const Reviews: React.FC = () => {
         animate={inView ? { opacity: 1, x: 0 } : {}}
         transition={{ duration: 0.7, ease: "easeInOut" }}
       >
-        User Reviews
+        <a href="/reviews">User Reviews</a>
       </motion.h2>
 
       {/* Review Submission Form */}
@@ -149,7 +149,7 @@ const Reviews: React.FC = () => {
             value={newReview.rating}
             onChange={handleRatingChange}
             size={30}
-            color2={"#15803d"}
+            color2={"#ffd700"}
           />
         </div>
         <div className="mb-4">
@@ -175,7 +175,7 @@ const Reviews: React.FC = () => {
           {loading
             ? "Submitting..."
             : success
-            ? "Review Submitted!"
+            ? "Review Submitted! Thanks!"
             : "Submit Review"}
         </button>
       </motion.form>
@@ -197,6 +197,7 @@ const Reviews: React.FC = () => {
       {/* Reviews Carousel */}
       <div className="w-full max-w-[70vw]">
         <Swiper
+          allowTouchMove={false}
           modules={[Autoplay]}
           autoplay={{ delay: 4000, disableOnInteraction: false }}
           loop
@@ -276,6 +277,11 @@ const Reviews: React.FC = () => {
             </p>
           )}
         </Swiper>
+        <div className="h-4 mx-auto w-full flex justify-center items-center">
+          <a href="/reviews" className="text-center text-green-700 mt-8 font-bold text-lg hover:underline underline-offset-2">
+            See All Reviews
+          </a>
+        </div>
       </div>
     </div>
   );

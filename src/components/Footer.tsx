@@ -2,7 +2,7 @@ import React from "react";
 
 const Footer: React.FC = () => {
   return (
-    <footer className="h-[25dvh] mx-auto w-full bg-neutral-800 flex items-center justify-center text-white text-center">
+    <footer className="min-h-[25dvh] h-fit mx-auto w-full bg-neutral-800 flex items-center justify-center text-white text-center">
       <div className="h-full w-[95vw] sm:w-[70vw] flex flex-row justify-center items-center">
         <div className="w-2/3 h-full mx-auto flex justify-start items-start py-2 sm:py-6">
           <p className="text-sm sm:text-md text-left w-full mx-auto h-full flex flex-col justify-between items-start">
@@ -12,7 +12,7 @@ const Footer: React.FC = () => {
               "Rusty". For more information see links beside.
             </p>
             <br />
-            <p className="md:text-lg">
+            <p className="text-xs">
               Icons by:{" "}
               <a
                 className="text-green-600 opacity-80 hover:text-green-500 hover:underline"

@@ -16,6 +16,7 @@ import FindTicket from "./components/TicketViewer";
 import AdminLogin from "./components/AdminLogin";
 import AdminDashboard from "./components/AdminDashboard";
 import Reviews from "./components/Reviews";
+import ReviewsPage from "./components/ReviewsPage";
 
 const App: React.FC = () => {
   return (
@@ -63,6 +64,16 @@ const App: React.FC = () => {
             <div>
               <Header />
               <Products />
+              <Footer />
+            </div>
+          }
+        />
+        <Route
+          path="/Reviews"
+          element={
+            <div>
+              <Header />
+              <ReviewsPage />
               <Footer />
             </div>
           }

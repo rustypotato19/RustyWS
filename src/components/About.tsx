@@ -78,6 +78,7 @@ const AboutUs: React.FC = () => {
             variants={containerVariants}
             initial="hidden"
             animate="visible"
+            
           >
             {paragraphs.map((paragraph, index) => (
               <motion.p

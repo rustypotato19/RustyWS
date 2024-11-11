@@ -52,7 +52,7 @@ const Home: React.FC = () => {
           Rusty's Web Services
         </h1>
         <p className="text-lg mb-6">
-          Professional web solutions for your growing business or personal needs. Our services range from arithmetic calculators to professional web development, all tailored to meet your needs.
+          Professional web solutions for your growing business or personal needs. <br/>Our services range from arithmetic calculators to professional web development, all tailored to meet your needs.
         </p>
       </div>
 

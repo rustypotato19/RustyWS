@@ -181,7 +181,7 @@ const Request: React.FC = () => {
                   <option value="">Priority...</option>
                   <option value="Low">Low</option>
                   <option value="Medium">Medium</option>
-                  <option value="High">High (+£10)</option>
+                  <option value="High">High (+££)</option>
                 </select>
               </motion.div>
 
@@ -240,7 +240,7 @@ const Request: React.FC = () => {
             </form>
             {loading && (
               <motion.div
-                className="fixed inset-0 w-screen h-screen flex justify-center items-center backdrop-blur z-40"
+                className="fixed inset-0 w-screen bg-neutral-800 h-screen flex justify-center items-center backdrop-blur z-40"
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ duration: 0.5, ease: "easeInOut" }}
@@ -269,7 +269,7 @@ const Request: React.FC = () => {
             exit={{ opacity: 0 }}
             transition={{ duration: 0.5, ease: "easeInOut" }}
           >
-            <div className="w-[85vw] sm:w-1/2 h-fit bg-neutral-900 border-black border-2 px-6 py-3 rounded-3xl">
+            <div className="w-[85vw] sm:w-1/2 h-fit bg-neutral-800 border-black border-2 px-6 py-3 rounded-3xl">
               <div className="text-center">
                 <h2 className="text-2xl font-bold text-green-600 mb-4">
                   Success!

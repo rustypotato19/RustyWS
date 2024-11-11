@@ -25,7 +25,7 @@ const skillsData = [
   },
   {
     name: "Git",
-    img: "/images/logos/git.svg",
+    img: "/images/logos/git.png",
     description:
       "Git is a distributed version-control system for tracking changes in source code during software development.",
     link: "https://git-scm.com/",
@@ -74,7 +74,7 @@ const skillsData = [
   },
   {
     name: "React",
-    img: "/images/logos/react.png",
+    img: "/logo512.png",
     description:
       "React is a JavaScript library for building user interfaces, especially single-page applications.",
     link: "https://reactjs.org/",

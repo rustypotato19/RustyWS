@@ -16,8 +16,8 @@ const Header: React.FC = () => {
     "Request",
     "Tickets",
     "Contact",
-    "Products",
     "Reviews",
+    "Products",
   ];
 
   // Effect to handle clicking outside of the dropdown or scrolling
@@ -76,7 +76,7 @@ const Header: React.FC = () => {
                   <a
                     key={link}
                     href={`${
-                      link === "Products" || link === "Tickets"
+                      link === "Products" || link === "Tickets" || link === "Reviews"
                         ? link === "Tickets"
                           ? "#view-ticket"
                           : "/" + link.toLocaleLowerCase()

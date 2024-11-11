@@ -38,16 +38,17 @@ const Products: React.FC = () => {
       estimatedDuration: "<1-6 weeks",
     },
   ];
+  const isSmall = window.innerWidth < window.innerHeight;
 
   return (
     <div
       id="products"
-      className="min-h-[50vh] w-screen text-white px-10 py-24 my-12 flex justify-center items-center"
+      className={`min-h-[50vh] w-screen text-white px-10 py-24 flex justify-center items-center ${isSmall ? "mb-12 mt-20" : "my-12"}`}
       data-aos="fade-up"
       data-aos-delay="200"
     >
       <div className="max-w-4xl mx-auto flex flex-col justify-center items-center gap-8">
-        <h2 className="text-3xl font-bold mb-6">Our Products & Services</h2>
+        <h2 className="text-3xl font-bold mb-6 text-center">Our Products & Services</h2>
         {products.map((product, index) => (
           <motion.div
             key={index}
