@@ -78,7 +78,7 @@ const Header: React.FC = () => {
                     href={`${
                       link === "Products" || link === "Tickets" || link === "Reviews"
                         ? link === "Tickets"
-                          ? "#view-ticket"
+                          ? "#tickets"
                           : "/" + link.toLocaleLowerCase()
                         : "/#" + link.toLowerCase()
                     }`}

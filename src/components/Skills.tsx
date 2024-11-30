@@ -135,7 +135,7 @@ const Skills: React.FC = () => {
   );
 
   return (
-    <div className="h-full w-3/4 mx-auto skills-container text-white px-10 py-24 transition-all duration-500 relative">
+    <div className="h-full w-screen mx-auto flex justify-center items-center flex-col skills-container text-white px-10 py-24 transition-all duration-500 relative">
       <motion.h2
         className="text-3xl font-bold mb-16 text-center"
         initial={{ opacity: 0, x: -50 }}
@@ -145,9 +145,9 @@ const Skills: React.FC = () => {
         Our Skills
       </motion.h2>
       <motion.div
-        className="skills-grid grid grid-cols-3 md:grid-cols-5 gap-6 transition-all duration-500"
+        className="skills-grid flex flex-grow md:w-[60vw] flex-wrap justify-center items-center gap-6 transition-all duration-500"
         initial="hidden"
-        whileInView="visible"
+        whileInView="visible" 
         viewport={{ once: true, amount: 0.3 }}
         variants={{
           hidden: {},

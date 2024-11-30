@@ -66,7 +66,7 @@ const FindTicket: React.FC = () => {
 
   return (
     <section
-      className="mx-auto w-full h-full flex justify-center items-center py-12"
+      className="mx-auto w-full h-full flex justify-center items-center py-12 text-center"
     >
       <motion.div
         ref={ref}
