@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import "./Skills.css";
 
 const skillsData = [
   {
@@ -147,7 +148,7 @@ const Skills: React.FC = () => {
       <motion.div
         className="skills-grid flex flex-grow md:w-[60vw] flex-wrap justify-center items-center gap-6 transition-all duration-500"
         initial="hidden"
-        whileInView="visible" 
+        whileInView="visible"
         viewport={{ once: true, amount: 0.3 }}
         variants={{
           hidden: {},
@@ -161,8 +162,11 @@ const Skills: React.FC = () => {
         {skillsData.map((skill) => (
           <motion.div
             key={skill.name}
-            className="skill-icon flex flex-col items-center cursor-pointer relative"
-            whileHover={{ scale: 1.1 }}
+            className={`skill-icon flex flex-col items-center cursor-pointer relative`}
+            whileHover={{
+              scale: 1.1,
+              rotate: Math.random() > 0.5 ? 5 : -5,
+            }}
             transition={{ type: "spring", stiffness: 300, damping: 20 }}
             variants={{
               hidden: { opacity: 0, y: 20 },
@@ -170,11 +174,15 @@ const Skills: React.FC = () => {
             }}
             onClick={() => handleIconClick(skill.name)}
           >
+            <div
+              className={`absolute top-[40%] left-1/2 -translate-x-1/2 -translate-y-1/2 -z-10 w-0 h-0 bg-white rounded-full shadow-[0_0_40px_40px_rgba(255,255,255,0.8)] transition-all duration-200 ${
+                selectedSkill !== skill.name ? "opacity-0" : "opacity-100"
+              }`}
+            ></div>
             <motion.img
               src={skill.img}
               alt={skill.name}
-              className="h-20 w-20 object-contain transition-all duration-300"
-              whileHover={{ rotate: 5 }}
+              className={`h-24 md:h-32 w-24 md:w-32 object-contain transition-all duration-300`}
             />
             <p className="mt-2 text-center font-semibold">{skill.name}</p>
           </motion.div>
@@ -225,7 +233,7 @@ const Skills: React.FC = () => {
           </motion.div>
         )}
       </AnimatePresence>
-      <p id="request" className="transparent relative top-0" />  
+      <p id="request" className="transparent relative top-0" />
     </div>
   );
 };

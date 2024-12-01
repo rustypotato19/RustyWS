@@ -65,12 +65,10 @@ const FindTicket: React.FC = () => {
   };
 
   return (
-    <section
-      className="mx-auto w-full h-full flex justify-center items-center py-12 text-center"
-    >
+    <section className="mx-auto w-full h-full flex justify-center items-center py-12 text-center">
       <motion.div
         ref={ref}
-        className="mx-auto p-2 lg:p-8 min-h-[30vh] w-full lg:w-[50dvw]"
+        className="mx-auto p-2 lg:p-8 min-h-[30vh] w-[90dvw] lg:w-[50dvw]"
         initial={{ opacity: 0, x: -50 }}
         animate={inView ? { opacity: 1, x: 0 } : {}}
         transition={{ duration: 0.7, ease: "easeInOut" }}

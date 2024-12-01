@@ -32,6 +32,7 @@ const Reviews: React.FC = () => {
   const [charRemaining, setCharRemaining] = useState<number>(MAX_CHAR_COUNT);
   const [isFocused, setIsFocused] = useState<boolean>(false);
   const isSmall = window.innerWidth < window.innerHeight;
+  const [hasClickedOut, setHasClickedOut] = useState<boolean>(false);
 
   // Create a reference for the form element
   const formRef = useRef<HTMLFormElement | null>(null);
@@ -185,19 +186,20 @@ const Reviews: React.FC = () => {
           initial={{ opacity: 0, y: 50 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 1 }}
-          className="text-center text-neutral-500 opacity-55 transition-transform duration-300"
+          className="text-center text-neutral-500 opacity-55"
         >
-          * Hint:
-          {!isFocused
-            ? " Click the reviews to pause"
-            : "  Click away to unpause"}
+          {!hasClickedOut
+            ? !isFocused
+              ? "*Hint: Click a review to pause"
+              : "*Hint: Click away to unpause"
+            : ""}
         </motion.p>
       )}
 
       {/* Reviews Carousel */}
       <div className="w-full max-w-[70vw]">
         <Swiper
-          allowTouchMove={false}
+          allowTouchMove={isSmall ? true : false}
           modules={[Autoplay]}
           autoplay={{ delay: 4000, disableOnInteraction: false }}
           loop
@@ -222,6 +224,7 @@ const Reviews: React.FC = () => {
               swiper.el.addEventListener("mouseleave", () => {
                 if (swiper.autoplay) swiper.autoplay.start();
                 setIsFocused(false);
+                setHasClickedOut(true);
               });
             }
           }}
@@ -278,7 +281,10 @@ const Reviews: React.FC = () => {
           )}
         </Swiper>
         <div className="h-4 mx-auto w-full flex justify-center items-center">
-          <a href="/reviews" className="text-center text-green-700 mt-8 font-bold text-lg hover:underline underline-offset-2">
+          <a
+            href="/reviews"
+            className="text-center text-green-700 mt-8 font-bold text-lg hover:underline underline-offset-2"
+          >
             See All Reviews
           </a>
         </div>
