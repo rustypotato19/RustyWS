@@ -116,7 +116,7 @@ const Services: React.FC = () => {
           pagination={{ clickable: true }}
           autoplay={{ delay: 4000, disableOnInteraction: false }}
           loop={true}
-          className="w-full px-6"
+          className="w-full px-6 flex flex-col justify-center items-center gap-6"
           onSwiper={(swiper: SwiperInstance) => setSwiperInstance(swiper)}
           allowTouchMove={focusedIndex == null ? false : true}
         >
@@ -145,7 +145,7 @@ const Services: React.FC = () => {
                     swiperInstance?.autoplay.start(); // Restart autoplay if item is unfocused
                   }
                 }}
-                className="cursor-pointer text-center w-full md:w-1/3 h-full bg-neutral-950 bg-opacity-70 rounded-lg border-2 border-green-800 flex flex-col justify-center items-center px-6 py-12"
+                className="cursor-pointer text-center w-full mx-auto md:w-1/3 h-full bg-neutral-950 bg-opacity-70 rounded-lg border-2 border-green-800 flex flex-col justify-center items-center px-6 py-12"
                 initial={{ height: 200 }}
                 animate={{
                   height: focusedIndex === index ? 350 : 200, // Animate only the modal height
