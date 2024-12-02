@@ -78,7 +78,7 @@ const Services: React.FC = () => {
       transition={{ duration: 0.7, ease: "easeInOut" }}
     >
       <motion.div
-        className="w-[90dvw] flex flex-col justify-center items-center gap-12 relative"
+        className="w-[90dvw] md:w-[50dvw] flex flex-col justify-center items-center gap-12 relative"
         initial={{ opacity: 0, x: -50 }}
         animate={{
           opacity: inView ? 1 : 0,
@@ -145,7 +145,7 @@ const Services: React.FC = () => {
                     swiperInstance?.autoplay.start(); // Restart autoplay if item is unfocused
                   }
                 }}
-                className="cursor-pointer text-center w-full mx-auto md:w-1/3 h-full bg-neutral-950 bg-opacity-70 rounded-lg border-2 border-green-800 flex flex-col justify-center items-center px-6 py-12"
+                className="cursor-pointer text-center w-full mx-auto md:w-2/3 h-full bg-neutral-950 bg-opacity-70 rounded-lg border-2 border-green-800 flex flex-col justify-center items-center px-6 py-12"
                 initial={{ height: 200 }}
                 animate={{
                   height: focusedIndex === index ? 350 : 200, // Animate only the modal height

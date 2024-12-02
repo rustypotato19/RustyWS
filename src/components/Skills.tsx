@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import "./Skills.css";
 
 const skillsData = [
   {
@@ -174,11 +173,6 @@ const Skills: React.FC = () => {
             }}
             onClick={() => handleIconClick(skill.name)}
           >
-            <div
-              className={`absolute top-[40%] left-1/2 -translate-x-1/2 -translate-y-1/2 -z-10 w-0 h-0 bg-white rounded-full shadow-[0_0_40px_40px_rgba(255,255,255,0.8)] transition-all duration-200 ${
-                selectedSkill !== skill.name ? "opacity-0" : "opacity-100"
-              }`}
-            ></div>
             <motion.img
               src={skill.img}
               alt={skill.name}
