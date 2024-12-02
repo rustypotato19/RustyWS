@@ -90,7 +90,7 @@ const Services: React.FC = () => {
         }}
       >
         <motion.div
-          className="absolute top-3 right-3 font-bold text-xs text-green-800"
+          className="absolute right-[10%] md:right-[20%] top-1/3 font-bold text-xs text-green-800 z-20"
           animate={{
             scale: [1, 1.1, 1],
             opacity: [1, 0.9, 1],
