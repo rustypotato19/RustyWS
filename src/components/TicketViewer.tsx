@@ -102,18 +102,18 @@ const FindTicket: React.FC = () => {
         ) : null}
         {ticketData && (
           <motion.div
-            className="bg-white border-4 border-green-700 p-6 rounded-lg shadow-lg"
+            className="bg-neutral-200 border-4 border-green-700 p-6 rounded-lg shadow-lg"
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, ease: "easeInOut" }}
           >
-            <h3 className="text-xl font-bold mb-2">
+            <h3 className="text-xl text-left font-bold mb-2">
               {formatRequestType(ticketData.request_type)}
             </h3>
-            <p className="flex items-center">
+            <p className="flex text-left items-center">
               <strong>Priority:</strong>{" "}
               <span
-                className={`ml-2 px-2 py-1 rounded text-sm font-bold ${
+                className={`ml-2 px-2 py-1 rounded text-sm  text-left font-bold ${
                   ticketData.priority === "Low"
                     ? "bg-green-200 text-green-800"
                     : ticketData.priority === "Medium"
@@ -124,17 +124,17 @@ const FindTicket: React.FC = () => {
                 {ticketData.priority}
               </span>
             </p>
-            <p className="mt-4">
+            <p className="mt-4  text-left">
               <strong>Description:</strong>
             </p>
-            <div className="bg-neutral-300 p-4 rounded-lg mb-4 overflow-auto">
+            <div className="bg-neutral-300 text-left p-4 rounded-lg mb-4 overflow-auto">
               {ticketData.description || "No description provided"}
             </div>
-            <p>
+            <p className=" text-left">
               <strong>Request Date:</strong>{" "}
               {new Date(ticketData.request_date).toLocaleDateString()}
             </p>
-            <p>
+            <p className=" text-left">
               <strong>Status:</strong>{" "}
               <span
                 className={`font-bold ${
@@ -148,7 +148,7 @@ const FindTicket: React.FC = () => {
                 {formatStatus(ticketData.status)}
               </span>
             </p>
-            <p>
+            <p className=" text-left">
               <strong>Contacted:</strong> {ticketData.contacted ? "Yes" : "No"}
             </p>
             <button

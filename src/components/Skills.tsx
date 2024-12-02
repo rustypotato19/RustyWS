@@ -176,7 +176,7 @@ const Skills: React.FC = () => {
             <motion.img
               src={skill.img}
               alt={skill.name}
-              className={`h-24 md:h-32 w-24 md:w-32 object-contain transition-all duration-300`}
+              className={`h-16 md:h-24 w-16 md:w-24 object-contain transition-all duration-300`}
             />
             <p className="mt-2 text-center font-semibold">{skill.name}</p>
           </motion.div>

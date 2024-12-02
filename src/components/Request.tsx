@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import axios from "axios";
 import LoaderComponent from "./LoadingSpinner";
 import { motion } from "framer-motion";
-import { useInView } from "react-intersection-observer"; // Import Intersection Observer
+import { useInView } from "react-intersection-observer";
 
 const Request: React.FC = () => {
   const [formData, setFormData] = useState({
@@ -10,6 +10,8 @@ const Request: React.FC = () => {
     contactInfo: "",
     description: "",
     priority: "",
+    firstName: "",
+    lastName: "",
   });
   const [charCount, setCharCount] = useState(500);
   const [loading, setLoading] = useState(false);
@@ -19,8 +21,8 @@ const Request: React.FC = () => {
   const [isCopied, setIsCopied] = useState(false);
 
   const { ref, inView } = useInView({
-    triggerOnce: true, // Animation triggers only once when the element comes into view
-    threshold: 0.2, // Trigger when 20% of the component is visible
+    triggerOnce: true,
+    threshold: 0.2,
   });
 
   const handleInputChange = (
@@ -68,6 +70,8 @@ const Request: React.FC = () => {
       contactInfo: formData.contactInfo,
       description: formData.description,
       priority: formData.priority,
+      firstName: formData.firstName,
+      lastName: formData.lastName,
     };
 
     try {
@@ -97,18 +101,34 @@ const Request: React.FC = () => {
   };
 
   const handleClose = () => {
-    // Reset state on close
     setFormData({
       requestType: "",
       contactInfo: "",
       description: "",
       priority: "",
+      firstName: "",
+      lastName: "",
     });
     setCharCount(500);
     setSuccess(false);
     setError("");
-    setTicketId(""); // Reset ticket ID
-    setIsCopied(false); // Reset copied state
+    setTicketId("");
+    setIsCopied(false);
+  };
+
+  const formContainerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.1, // Stagger effect for children
+      },
+    },
+  };
+
+  const formItemVariants = {
+    hidden: { opacity: 0, y: 20 },
+    visible: { opacity: 1, y: 0, transition: { duration: 0.5 } },
   };
 
   return (
@@ -121,9 +141,9 @@ const Request: React.FC = () => {
     >
       <motion.div
         className="w-full max-w-2xl mx-auto"
-        initial={{ opacity: 0, x: -50 }}
-        animate={inView ? { opacity: 1, x: 0 } : {}}
-        transition={{ duration: 0.7, ease: "easeInOut", delay: 0.3 }}
+        variants={formContainerVariants}
+        initial="hidden"
+        animate={inView ? "visible" : "hidden"}
       >
         {!success ? (
           <>
@@ -134,12 +154,67 @@ const Request: React.FC = () => {
               Interested in our services? Fill out the form below and we'll get
               back to you as soon as possible.
             </p>
-            <form onSubmit={handleSubmit} className="space-y-4">
+            <motion.form
+              onSubmit={handleSubmit}
+              className="space-y-6"
+              variants={formContainerVariants}
+            >
+              {/* First Name and Last Name */}
               <motion.div
-                initial={{ opacity: 0, x: -50 }}
-                animate={inView ? { opacity: 1, x: 0 } : {}}
-                transition={{ duration: 0.7, ease: "easeInOut", delay: 0.5 }}
+                className="flex flex-row gap-4"
+                variants={formItemVariants}
               >
+                <div className="w-1/2">
+                  <label htmlFor="first-name" className="block mb-1">
+                    First Name *
+                  </label>
+                  <input
+                    type="text"
+                    id="first-name"
+                    name="firstName"
+                    value={formData.firstName}
+                    onChange={handleInputChange}
+                    className="w-full text-gray-900 placeholder:text-gray-600 border-green-800 border-4 bg-gray-200 placeholder:font-bold rounded-lg p-2"
+                    placeholder="Jane"
+                    required
+                  />
+                </div>
+                <div className="w-1/2">
+                  <label htmlFor="last-name" className="block mb-1">
+                    Last Name *
+                  </label>
+                  <input
+                    type="text"
+                    id="last-name"
+                    name="lastName"
+                    value={formData.lastName}
+                    onChange={handleInputChange}
+                    className="w-full text-gray-900 placeholder:text-gray-600 border-green-800 border-4 bg-gray-200 placeholder:font-bold rounded-lg p-2"
+                    placeholder="Doe"
+                    required
+                  />
+                </div>
+              </motion.div>
+
+              {/* Contact Email */}
+              <motion.div variants={formItemVariants}>
+                <label htmlFor="contact-info" className="block mb-1">
+                  Contact Email Address *
+                </label>
+                <input
+                  type="email"
+                  id="contact-info"
+                  name="contactInfo"
+                  value={formData.contactInfo}
+                  onChange={handleInputChange}
+                  className="w-full text-gray-900 placeholder:text-gray-600 border-green-800 border-4 bg-gray-200 placeholder:font-bold rounded-lg p-2"
+                  placeholder="example@email.com"
+                  required
+                />
+              </motion.div>
+
+              {/* Request Type */}
+              <motion.div variants={formItemVariants}>
                 <label htmlFor="request-type" className="block mb-1">
                   Request Type *
                 </label>
@@ -148,25 +223,19 @@ const Request: React.FC = () => {
                   name="requestType"
                   value={formData.requestType}
                   onChange={handleInputChange}
-                  className="w-full text-gray-900 font-bold bg-gray-200 border-green-800 border-4 rounded-lg p-2"
+                  className="w-full text-gray-900 bg-gray-200 border-green-800 border-4 rounded-lg p-2"
                   required
                 >
                   <option value="">Request type...</option>
-                  <option value="web-development">
-                    Website Development
-                  </option>
+                  <option value="web-development">Website Development</option>
                   <option value="plugin-development">Plugin Development</option>
-                  {/* <option value="standalone-project">Strategy Consultation</option> */}
                   <option value="standalone-project">Coding Project</option>
                   <option value="other">Other (Specify)</option>
                 </select>
               </motion.div>
 
-              <motion.div
-                initial={{ opacity: 0, x: -50 }}
-                animate={inView ? { opacity: 1, x: 0 } : {}}
-                transition={{ duration: 0.7, ease: "easeInOut", delay: 0.7 }}
-              >
+              {/* Priority */}
+              <motion.div variants={formItemVariants}>
                 <label htmlFor="priority" className="block mb-1">
                   Priority *
                 </label>
@@ -175,7 +244,7 @@ const Request: React.FC = () => {
                   name="priority"
                   value={formData.priority}
                   onChange={handleInputChange}
-                  className="w-full text-gray-900 font-bold bg-gray-200 border-green-800 border-4 rounded-lg p-2"
+                  className="w-full text-gray-900 bg-gray-200 border-green-800 border-4 rounded-lg p-2"
                   required
                 >
                   <option value="">Priority...</option>
@@ -185,31 +254,8 @@ const Request: React.FC = () => {
                 </select>
               </motion.div>
 
-              <motion.div
-                initial={{ opacity: 0, x: -50 }}
-                animate={inView ? { opacity: 1, x: 0 } : {}}
-                transition={{ duration: 0.7, ease: "easeInOut", delay: 0.9 }}
-              >
-                <label htmlFor="contact-info" className="block mb-1">
-                  Contact Email Address *
-                </label>
-                <input
-                  type="text"
-                  id="contact-info"
-                  name="contactInfo"
-                  value={formData.contactInfo}
-                  onChange={handleInputChange}
-                  className="w-full text-gray-900 font-bold placeholder:text-gray-600 border-green-800 border-4 bg-gray-200 placeholder:font-bold rounded-lg p-2"
-                  placeholder="example@email.com"
-                  required
-                />
-              </motion.div>
-
-              <motion.div
-                initial={{ opacity: 0, x: -50 }}
-                animate={inView ? { opacity: 1, x: 0 } : {}}
-                transition={{ duration: 0.7, ease: "easeInOut", delay: 1.1 }}
-              >
+              {/* Description */}
+              <motion.div variants={formItemVariants}>
                 <label htmlFor="description" className="block mb-1">
                   Description
                 </label>
@@ -220,7 +266,7 @@ const Request: React.FC = () => {
                   name="description"
                   value={formData.description}
                   onChange={handleInputChange}
-                  className="w-full text-gray-900 font-bold placeholder:text-gray-600 border-green-800 border-4 placeholder:font-bold bg-gray-200 rounded-lg p-2"
+                  className="w-full text-gray-900 placeholder:text-gray-600 border-green-800 border-4 bg-gray-200 placeholder:font-bold rounded-lg p-2"
                   placeholder="Something to describe your needs"
                 ></textarea>
                 <div className="text-right text-sm">
@@ -228,16 +274,15 @@ const Request: React.FC = () => {
                 </div>
               </motion.div>
 
+              {/* Submit Button */}
               <motion.button
                 type="submit"
-                className="bg-green-800 w-fit self-start hover:bg-green-900 drop-shadow-lg hover:scale-[102%] text-white font-bold py-2 px-4 rounded-lg relative bottom-8"
-                initial={{ opacity: 0, x: -50 }}
-                animate={inView ? { opacity: 1, x: 0 } : {}}
-                transition={{ duration: 0.7, ease: "easeInOut", delay: 1.1 }}
+                className="bg-green-800 hover:bg-green-900 text-white font-bold py-2 px-6 rounded-lg shadow-lg"
+                variants={formItemVariants}
               >
                 Submit
               </motion.button>
-            </form>
+            </motion.form>
             {loading && (
               <motion.div
                 className="fixed inset-0 w-screen bg-neutral-800 h-screen flex justify-center items-center backdrop-blur z-40"
@@ -322,7 +367,6 @@ const Request: React.FC = () => {
           </motion.div>
         )}
       </motion.div>
-      <p id="tickets" className="transparent relative top-52" />
     </motion.div>
   );
 };
