@@ -18,7 +18,7 @@ const containerVariants = {
   },
 };
 
-// Variants for each child element (e.g., paragraph)
+// Variants for each child element (e.g. paragraph)
 const childVariants = {
   hidden: {
     opacity: 0,
