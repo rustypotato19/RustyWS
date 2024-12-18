@@ -1,23 +1,25 @@
 import React, { useState, useEffect, useRef } from "react";
 import { FaBars } from "react-icons/fa";
+import { Link, useLocation } from "react-router-dom";
 
 const Header: React.FC = () => {
   const [hoveredLink, setHoveredLink] = useState<string | null>(null);
   const [dropdownOpen, setDropdownOpen] = useState<boolean>(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
+  const location = useLocation();
 
   // Media query to determine if the screen is small
   const isSmallDevice = window.innerWidth < window.innerHeight;
 
   const links = [
-    "Home",
-    "About",
-    "Services",
-    "Request",
-    "Tickets",
-    "Contact",
-    "Reviews",
-    "Products",
+    { name: "Home", href: "/#home" },
+    { name: "About", href: "/#about" },
+    { name: "Services", href: "/#services" },
+    { name: "Request", href: "/#request" },
+    { name: "Tickets", href: "/#tickets" },
+    { name: "Contact", href: "/#contact" },
+    { name: "Reviews", href: "/#reviews" },
+    { name: "Products", href: "/products" },
   ];
 
   // Effect to handle clicking outside of the dropdown or scrolling
@@ -49,6 +51,17 @@ const Header: React.FC = () => {
     };
   }, [dropdownOpen]);
 
+  // Scroll to specific section when URL changes
+  useEffect(() => {
+    const hash = location.hash;
+    if (hash) {
+      const element = document.querySelector(hash);
+      if (element) {
+        element.scrollIntoView({ behavior: "smooth" });
+      }
+    }
+  }, [location]);
+
   return (
     <header className="w-screen h-fit mx-auto flex justify-center items-center">
       <div className="text-neutral-900 bg-black bg-opacity-75 fixed top-4 left-1/2 transform -translate-x-1/2 flex flex-row justify-center items-center gap-2 sm:gap-6 backdrop-blur-md px-3 py-2 sm:px-6 sm:py-4 z-50 border-green-700 border-[2px] rounded-full transition-all duration-300 ease-in-out">
@@ -73,20 +86,14 @@ const Header: React.FC = () => {
             >
               <div className="grid grid-cols-3 grid-rows-2 text-center transition-all duration-500 ease-in-out">
                 {links.map((link) => (
-                  <a
-                    key={link}
-                    href={`${
-                      link === "Products" || link === "Tickets" || link === "Reviews"
-                        ? link === "Tickets"
-                          ? "#tickets"
-                          : "/" + link.toLocaleLowerCase()
-                        : "/#" + link.toLowerCase()
-                    }`}
+                  <Link
+                    key={link.name}
+                    to={link.href}
                     className="block px-4 py-2 hover:bg-green-700 transition-all duration-300 ease-in-out"
                     onClick={() => setDropdownOpen(false)}
                   >
-                    {link}
-                  </a>
+                    {link.name}
+                  </Link>
                 ))}
               </div>
             </div>
@@ -94,25 +101,19 @@ const Header: React.FC = () => {
         ) : (
           // Render original links for larger devices
           links.map((link) => (
-            <a
-              key={link}
-              href={`${
-                link === "Products" || link === "My-Ticket"
-                  ? link === "My-Ticket"
-                    ? "#view-ticket"
-                    : "/" + link.toLocaleLowerCase()
-                  : "/#" + link.toLowerCase()
-              }`}
-              onMouseEnter={() => setHoveredLink(link)}
+            <Link
+              key={link.name}
+              to={link.href}
+              onMouseEnter={() => setHoveredLink(link.name)}
               onMouseLeave={() => setHoveredLink(null)}
               className={`transition-all duration-300 ease-in-out sm:px-4 border-x-[1px] sm:border-x-2 rounded-lg ${
-                hoveredLink === link
+                hoveredLink === link.name
                   ? "text-green-700 border-green-700"
                   : "text-green-700 border-transparent"
               } hover:text-green-800 hover:border-green-700`}
             >
-              {link}
-            </a>
+              {link.name}
+            </Link>
           ))
         )}
       </div>

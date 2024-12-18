@@ -17,6 +17,7 @@ import AdminLogin from "./components/AdminLogin";
 import AdminDashboard from "./components/AdminDashboard";
 import Reviews from "./components/Reviews";
 import ReviewsPage from "./components/ReviewsPage";
+import ScrollToTop from "./components/ScrollToTop";
 
 const App: React.FC = () => {
   return (
@@ -62,6 +63,7 @@ const App: React.FC = () => {
           path="/products"
           element={
             <div>
+              <ScrollToTop />
               <Header />
               <Products />
               <Footer />

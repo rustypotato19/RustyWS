@@ -42,7 +42,6 @@ const Products: React.FC = () => {
 
   return (
     <div
-      id="products"
       className={`min-h-[50vh] w-screen text-white px-10 py-24 flex justify-center items-center ${isSmall ? "mb-12 mt-20" : "my-12"}`}
       data-aos="fade-up"
       data-aos-delay="200"
