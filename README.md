@@ -4,5 +4,5 @@ Feel free to review, critise or compliment
 
 This is my first major React.js project
 
-## Check out my pinterest for colour scheme inspiration!
+### Check out my pinterest for colour scheme inspiration!
 [Click Here](https://uk.pinterest.com/rustywebservices/)
